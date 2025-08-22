@@ -69,46 +69,7 @@ The full, reproducible sequence I executed is below. It mirrors the screenshots 
 <summary><strong>Expand to view</strong></summary>
 
 DEPLOY SAMPLE APPLICATION USING AWS CODEDEPLOY
-1) **Create EC2 instance role (IAM)**
-   - IAM → Roles → Create role → AWS service: **EC2**
-   - Permissions: `AmazonEC2RoleforAWSCodeDeploy` (or modern equivalent policies)
-   - Name: `EC2instancerole`
 
-2) **Launch EC2 (Amazon Linux 2023)**
-   - Name: `cutul-instance`, Type: `t3.micro`
-   - SG: allow HTTP(80) + HTTPS(443)
-   - Advanced details → Instance profile: `EC2instancerole`
-
-3) **Install CodeDeploy agent (on EC2)**
-   ```bash
-   sudo dnf -y update || sudo yum -y update
-   sudo dnf -y install ruby wget || sudo yum -y install ruby wget
-   cd /tmp && wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
-   chmod +x ./install && sudo ./install auto
-   sudo systemctl status codedeploy-agent
-   ```
-
-4) **Create CodeDeploy service role**
-   - IAM → Roles → Create role → AWS service: **CodeDeploy**
-   - Permissions: `AWSCodeDeployRole`
-   - Name: `codedeployrole1`
-
-5) **Create CodeDeploy App + Deployment Group**
-   - App: `MyDemoapplication` (EC2/on‑premises)
-   - Group: `MyDemoDeploymentGroup`
-   - Service role: `codedeployrole1`
-   - Target EC2 by tag: Key `Name` = `cutul-instance`
-   - Config: `CodeDeployDefault.OneAtATime`
-
-6) **Artifacts bucket + revision**
-   ```bash
-   aws s3 mb s3://cutul-bucket2025
-   aws s3 cp sample-app.zip s3://cutul-bucket2025/codedeploy-demo/app.zip
-   ```
-
-7) **Create deployment**
-   - Revision: **Amazon S3** → `s3://cutul-bucket2025/codedeploy-demo/app.zip`
-   - Wait for **Succeeded**, then open the EC2 Public IP.
 step 1:
 create a role in IAM
 
