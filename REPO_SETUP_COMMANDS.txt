@@ -1,0 +1,15 @@
+# Create a new GitHub repo named: aws-codedeploy-ec2-demo
+# Description: End-to-end demo: Deploy sample app to EC2 using AWS CodeDeploy, with CLI + screenshots.
+
+# Local git setup (from your machine in the folder that contains these files):
+git init
+git add .
+git commit -m "Initial commit: AWS CodeDeploy on EC2 demo with screenshots and README"
+git branch -M main
+git remote add origin https://github.com/USERNAME/aws-codedeploy-ec2-demo.git
+git push -u origin main
+
+# After pushing:
+# - Add a repository description and topics: aws, codedeploy, ec2, s3, devops
+# - Pin the repo to your GitHub profile
+# - Add the repo link to your LinkedIn Featured section or as a Project
